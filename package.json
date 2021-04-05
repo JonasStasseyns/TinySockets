@@ -7,5 +7,8 @@
   },
   "scripts": {
     "start": "node index.js"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
   }
 }
