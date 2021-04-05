@@ -19,7 +19,7 @@ server.listen(port, () => {
 io.on('connection', (socket) => {
 
     socket.on('new message', (data) => {
-
+        console.log('received')
         socket.broadcast.emit('resp', {
             username: 'NAME',
             message: 'OTHER'
