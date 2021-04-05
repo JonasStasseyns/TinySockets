@@ -20,9 +20,9 @@ io.on('connection', (socket) => {
 
     socket.on('new message', (data) => {
 
-        socket.broadcast.emit('new message', {
-            username: socket.username,
-            message: data
+        socket.broadcast.emit('resp', {
+            username: 'NAME',
+            message: 'OTHER'
         });
     })
 })
