@@ -1,28 +1,13 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-app.use(cors())
-const path = require('path')
-const server = require('http').createServer(app)
-const io = require('socket.io')(server, {
-    cors: {
-        origin: "https://bachelorproef-b2b80.web.app/",
-        methods: ["GET", "POST"]
-    }
-})
-const port = process.env.PORT || 3000
+const app = require('express')()
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
 
-server.listen(port, () => {
-    console.log('Server listening at port %d', port);
+io.on('connection', socket => {
+  socket.on('message', ({ name, message }) => {
+    io.emit('message', { name, message })
+  })
 })
 
-io.on('connection', (socket) => {
-
-    socket.on('new message', (data) => {
-        console.log('received')
-        socket.broadcast.emit('resp', {
-            username: 'NAME',
-            message: 'OTHER'
-        });
-    })
+http.listen(4000, function() {
+  console.log('listening on port 4000')
 })
